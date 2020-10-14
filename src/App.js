@@ -1,26 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { NavLink, Route } from 'react-router-dom';
+import { Container } from 'semantic-ui-react';
+import WatchlistPage from './pages/Watchlist-Page';
+import MoviesPage from './pages/Movies-Page';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Container>
+      <div className="ui two item menu">
+        <NavLink className="item" activeClassName="active" exact to="/">
+          Home
+        </NavLink>
+        <NavLink
+          className="item"
+          activeClassName="active"
+          exact
+          to="/movies"
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          Movies
+        </NavLink>
+      </div>
+      <Route exact path="/" component={WatchlistPage} />
+      <Route path="/movies" component={MoviesPage} />
+      <Route path="/watch-list/edit/:id" component={WatchlistPage} />
+    </Container>
   );
-}
+};
 
 export default App;
