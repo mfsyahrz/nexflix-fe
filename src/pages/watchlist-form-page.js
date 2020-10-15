@@ -16,7 +16,7 @@ const WatchlistFormPage = ({ match }) => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `http://api-nexflix.herokuapp.com/watchlist/${id}`,
+            `https://api-nexflix.herokuapp.com/watchlist/${id}`,
           );
           dispatch({
             type: 'FETCH_1WATCHLIST',
