@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import ContactForm from '../components/contact-form';
-import { flashErrorMessage } from '../components/flash-message';
+import WatchlistForm from '../components/watchlist-form';
+import { flashErrorMessage } from '../components/Error';
 import { WatchlistContext } from '../context/watchlist-context';
 
 const WatchlistFormPage = ({ match }) => {
+
   const [state, dispatch] = useContext(WatchlistContext);
   const [loading, setLoading] = useState(true);
 
@@ -15,11 +16,11 @@ const WatchlistFormPage = ({ match }) => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3030/contacts/${id}`,
+            `http://api-nexflix.herokuapp.com/watchlist/${id}`,
           );
           dispatch({
-            type: 'FETCH_WATCHLIST',
-            payload: response.data,
+            type: 'FETCH_1WATCHLIST',
+            payload: response.data.watchlist,
           });
           setLoading(false);
         } catch (error) {
@@ -38,7 +39,7 @@ const WatchlistFormPage = ({ match }) => {
 
   return (
     <div>
-      <ContactForm contact={state.contact} />
+      <WatchlistForm watchlist={state.watchlist} />
     </div>
   );
 }

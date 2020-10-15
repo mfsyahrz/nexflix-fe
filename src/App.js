@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 import WatchlistPage from './pages/Watchlist-Page';
+import WatchlistFormPage from './pages/watchlist-form-page';
 import MoviesPage from './pages/Movies-Page';
 
 const App = () => {
@@ -22,7 +23,7 @@ const App = () => {
       </div>
       <Route exact path="/" component={WatchlistPage} />
       <Route path="/movies" component={MoviesPage} />
-      <Route path="/watch-list/edit/:id" component={WatchlistPage} />
+      <Route path="/watchlist/notes/:id" component={WatchlistFormPage} />
     </Container>
   );
 };

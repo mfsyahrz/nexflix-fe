@@ -16,6 +16,13 @@ function reducer(state, action) {
         watchlists: action.payload,
       };
     }
+
+    case 'FETCH_1WATCHLIST': {
+        return {
+          ...state,
+          watchlist: action.payload,
+        };
+      }
     case 'UPDATE_WATCHLIST': {
         const watchlist = action.payload;
         return {
@@ -26,7 +33,7 @@ function reducer(state, action) {
           message: {
             type: 'success',
             title: 'Update Successful',
-            content: `watchlist "${watchlist.email}" has been updated!`,
+            content: `watchlist "${watchlist.id}" has been updated! please reload to continue`,
           },
         };
       }

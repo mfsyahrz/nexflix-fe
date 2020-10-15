@@ -19,38 +19,52 @@ const WatchlistCard = ({ watchlist }) => {
     });
   };
 
+  const ToggleStatus = async watchlistId => {
+    console.log(watchlist.status)
+
+    axios.put(`https://api-nexflix.herokuapp.com/watchlist/${watchlistId}/`,
+    {
+      watchlist:
+        {
+          status: watchlist.status === 'unwatched'? 'watched' : 'unwatched',
+          comment: watchlist.comment
+        }
+    } 
+    ).then(res => {
+    });
+    dispatch({
+      type: 'UPDATE_WATCHLIST',
+      payload: watchlistId,
+    });
+  };
+
+  
+
   return (
     
     <Card>
       <Card.Content>
-        <Card.Header>
+      <Card.Header>
           <Icon name="title" /> {watchlist.title}
         </Card.Header>
         <Card.Description>
-          <p>
-            <Icon name="status" /> {watchlist.status}
-          </p>
-          <p>
-            <Icon name="comment" /> {watchlist.comment}
-          </p>
+        <Button 
+        as={Link}
+        exact
+        to={`/watchlist/notes/${watchlist.id}`}
+        class="ui circular icon button,ui right floated button">Notes</Button>
+        {watchlist.comment}
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <div className="ui two buttons">
-        <Button
-            basic
-            color="green"
-            as={Link}
-            to={`/watchlist/edit/${watchlist.id}`}
-          >
-            Edit
-          </Button>
-          <Button basic color="red" onClick={() => DeleteWatchlist(watchlist.id)}
-          to={`/`}
-           >
-            Delete
-          </Button>
-        </div>
+      <div class="ui bottom attached button"
+      onClick={() => ToggleStatus(watchlist.id)}
+      >
+      {watchlist.status}
+    </div>
+    <div basic class="ui bottom attached button,ui red button" onClick={() => DeleteWatchlist(watchlist.id)}>
+    Delete
+    </div>
       </Card.Content>
     </Card>
   );
